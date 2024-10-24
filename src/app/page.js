@@ -1,101 +1,49 @@
-import Image from "next/image";
+'use client';
+import { useState, useRef } from 'react';
+import { FaHeart, FaStar, FaRunning, FaArrowDown } from 'react-icons/fa';
+import InfiniteImageScroll from '@/components/InfiniteImageScroll';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isHolding, setIsHolding] = useState(false);
+  const secondSectionRef = useRef(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleMouseDown = () => setIsHolding(true);
+  const handleMouseUp = () => setIsHolding(false);
+
+  const scrollToSecondSection = () => {
+    secondSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <>
+      <main className="flex flex-col min-h-screen items-center justify-center bg-slate-50">
+        <h1 
+          className={`text-4xl md:text-6xl font-bold text-gray-800 font-reenie-beanie cursor-pointer transition-colors duration-300 ${isHolding ? 'text-pink-500 animate-shake' : ''}`}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          Athena Wang
+        </h1>
+        <div className="mt-4 flex space-x-4">
+          <FaHeart className="text-red-500 text-2xl" />
+          <FaStar className="text-yellow-500 text-2xl" />
+          <FaRunning className="text-blue-500 text-2xl" />
+        </div>
+        <div className="mt-48 flex space-x-4">
+          <FaArrowDown 
+            className="text-gray-800 text-2xl animate-bounce cursor-pointer" 
+            onClick={scrollToSecondSection}
+          />
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <section 
+        ref={secondSectionRef} 
+        className="min-h-screen bg-slate-100 px-48"
+      >
+        <InfiniteImageScroll />
+      </section>
+      <footer className="absolute bottom-0 w-full flex items-center justify-center py-8 text-gray-500 text-sm">Made with ♥ by Alex</footer>
+    </>
   );
 }
