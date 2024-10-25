@@ -43,7 +43,7 @@ export default function Home() {
       </main>
       <section 
         ref={secondSectionRef} 
-        className="min-h-screen w-full bg-slate-50 px-48 py-24"
+        className="min-h-screen w-full bg-slate-50 px-4 sm:px-8 md:px-24 lg:px-48 pt-4 pb-24"
       >
         <ImageContainer /> 
       </section>
