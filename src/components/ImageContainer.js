@@ -24,11 +24,11 @@ const ImageContainer = () => {
   }, []);
 
   if (loading) {
-    return <p className="text-center py-4 text-gray-500 font-reenie-beanie">Loading Love...</p>;
+    return <p className="text-center py-4 text-gray-500 font-reenie-beanie">Loading...</p>;
   }
 
   return (
-    <div className="columns-2 md:columns-3 gap-4">
+    <div className="columns-2 md:columns-3 gap-4 pb-24">
       {images.map((image) => (
         <div key={image.public_id} className="break-inside-avoid mb-4 relative group">
           <Image

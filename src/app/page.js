@@ -1,7 +1,8 @@
 'use client';
 import { useState, useRef } from 'react';
 import { FaHeart, FaStar, FaRunning, FaArrowDown } from 'react-icons/fa';
-import ImageContainer from '@/components/InfiniteImageScroll';
+import ImageContainer from '@/components/ImageContainer';
+import SpotifyPlayer from '@/components/SpotifyPlayer';
 
 export default function Home() {
   const [isHolding, setIsHolding] = useState(false);
@@ -42,9 +43,9 @@ export default function Home() {
       </main>
       <section 
         ref={secondSectionRef} 
-        className="min-h-screen bg-slate-50 px-48 py-24"
+        className="min-h-screen w-full bg-slate-50 px-48 py-24"
       >
-        <ImageContainer />
+        <ImageContainer /> 
       </section>
       <footer className="absolute bottom-0 w-full flex items-center justify-center py-8 text-gray-500 text-sm">Made with ♥ by Alex</footer>
     </>
